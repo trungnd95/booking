@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "env": {
+    "browser": true
+  },
+  "plugins": ["react", "prettier"],
+  // To use airbnb -> install eslint-config-airbnb
+  // To use eslint react -> install eslint-plugin-react
+  // To automatically disable all ESLint rules that conflict with prettier -> install eslint-config-prettier, eslint-plugin-prettier
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "rules": {
+    "prettier/prettier": ["error"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+    "camelcase": "warn"
+  }
+}
+// "eslint.validate": ["javascript"]
