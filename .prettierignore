@@ -1,2 +1,5 @@
 .yarn
 node_modules
+.cache
+package-lock.json
+yarn.lock

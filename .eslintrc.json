@@ -18,10 +18,17 @@
     "ecmaVersion": 2021
   },
   "rules": {
-    "prettier/prettier": ["error"],
-    "quotes": ["error", "double"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "semi": ["error", "always"],
-    "camelcase": "warn"
+    "camelcase": "warn",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    // "react/jsx-uses-react": "off",
+    // "react/react-in-jsx-scope": "off"
   }
 }
 // "eslint.validate": ["javascript"]

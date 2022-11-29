@@ -1,4 +1,5 @@
-
 # which version of Node is used
+
 # https://github.com/nodejs/Release/blob/main/CODENAMES.md
-lts/fermium
+
+lts/gallium

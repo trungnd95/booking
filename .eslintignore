@@ -1,2 +1,5 @@
-**/node_modules/**
-__ENV.js
+.cache
+package-lock.json
+public
+node_modules
+yarn.lock
