@@ -1,0 +1,142 @@
+.header {
+  background-color: #0035b0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.headerContainer {
+  width: 100%;
+  max-width: 1024px;
+  margin: 20px 20px 100px 20px;
+}
+
+.headerContainer.headerListPage {
+  margin-bottom: 0 !important;
+}
+
+.headerList {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.headerListItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerListItem.active {
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.headerDesc {
+  margin: 20px 0px;
+}
+
+.headerBtn {
+  background-color: #0071c2;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 0px;
+  font-weight: 500;
+}
+
+.headerSearch {
+  height: 30px;
+  border: 3px solid #febb02;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: -25px;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.headerSearchIcon,
+.headerSearchText {
+  color: lightgray;
+}
+
+.headerSearchText {
+  font-size: 13px;
+}
+
+.headerSearchItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerSearchInput {
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.dateRangePicker {
+  position: absolute;
+  top: 50px;
+}
+
+.options {
+  position: absolute;
+  background-color: white;
+  color: gray;
+  top: 50px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+}
+
+.optionItem {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.optionCounter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: black;
+}
+
+.optionText {
+  font-size: 13px;
+  font-weight: semibold;
+}
+
+.optionCounterNumber {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.optionCounterButton {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #0071c2;
+  color: #0071c2;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.optionCounterButton:disabled {
+  opacity: 0.3;
+  background-color: lightgray;
+  cursor: not-allowed;
+}

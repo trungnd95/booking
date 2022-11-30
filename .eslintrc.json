@@ -18,17 +18,19 @@
     "ecmaVersion": 2021
   },
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ],
+    "prettier/prettier": ["error"],
     "semi": ["error", "always"],
     "camelcase": "warn",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
-    // "react/jsx-uses-react": "off",
-    // "react/react-in-jsx-scope": "off"
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "no-restricted-exports": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "React"
+      }
+    ]
   }
 }
 // "eslint.validate": ["javascript"]
