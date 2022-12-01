@@ -1,5 +1,13 @@
 import React from 'react';
-import { Featured, FeaturedProperties, Header, Navbar, PropertyList } from '../../components';
+import {
+  Contact,
+  Featured,
+  FeaturedProperties,
+  Footer,
+  Header,
+  Navbar,
+  PropertyList,
+} from '../../components';
 import './Home.css';
 
 function Home() {
@@ -13,6 +21,8 @@ function Home() {
         <PropertyList />
         <h1 className="homeTitle">Homes guests love</h1>
         <FeaturedProperties />
+        <Contact />
+        <Footer />
       </div>
     </div>
   );
