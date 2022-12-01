@@ -30,7 +30,8 @@
       {
         "varsIgnorePattern": "React"
       }
-    ]
+    ],
+    "jsx-a11y/label-has-associated-control": "off"
   }
 }
 // "eslint.validate": ["javascript"]
