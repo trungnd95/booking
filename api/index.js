@@ -1,23 +1,20 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import mongoose from 'mongoose';
+import { connect } from './helpers/db';
+import authRoutes from './routes/auth';
+import hotelsRoutes from './routes/hotels';
+import roomsRoutes from './routes/rooms';
+import usersRoutes from './routes/users';
 
 const app = express();
 dotenv.config();
 
-const connectDB = async () => {
-  await mongoose.connect(process.env.MONGODB_URI);
-};
-
-mongoose.connection.on('connected', () => {
-  console.log('Connected to DB');
-});
-
-mongoose.connection.on('disconnected', () => {
-  console.log('Connected to DB');
-});
+// Routes
+app.use('/auth', authRoutes);
+app.use('/hotel', hotelsRoutes);
+app.use('/rooms', roomsRoutes);
+app.use('/users', usersRoutes);
 
 app.listen(8800, () => {
-  connectDB();
-  console.log('App Running...');
+  connect();
 });
