@@ -1,3 +1,4 @@
+import Joi from 'joi';
 import mongoose from 'mongoose';
 
 const hotelSchema = new mongoose.Schema({
@@ -47,5 +48,23 @@ const hotelSchema = new mongoose.Schema({
 });
 
 const Hotel = mongoose.model('Hotel', hotelSchema);
+
+export function validateInput(hotelData) {
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    type: Joi.string().required(),
+    city: Joi.string().required(),
+    address: Joi.string().required(),
+    distance: Joi.string().required(),
+    photos: Joi.array().items(Joi.string()),
+    desc: Joi.string().required(),
+    rating: Joi.number().min(0).max(5),
+    rooms: Joi.array().items(Joi.string()),
+    cheapestPrice: Joi.number().required(),
+    featured: Joi.boolean(),
+  });
+
+  return schema.validate(hotelData);
+}
 
 export default Hotel;
