@@ -7,3 +7,4 @@
 {"level":"error","message":"Hotel validation failed: cheapestPrice: Path `cheapestPrice` is required., desc: Path `desc` is required., distance: Path `distance` is required., address: Path `address` is required., city: Path `city` is required., type: Path `type` is required., name: Path `name` is required."}
 {"level":"error","message":"Hotel validation failed: cheapestPrice: Path `cheapestPrice` is required., desc: Path `desc` is required., distance: Path `distance` is required., address: Path `address` is required., city: Path `city` is required., type: Path `type` is required., name: Path `name` is required."}
 {"level":"error","message":"Unexpected token } in JSON at position 25"}
+{"level":"error","message":"E11000 duplicate key error collection: booking.users index: username_1 dup key: { username: \"trungnd2\" }"}

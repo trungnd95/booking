@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import 'express-async-errors';
 import winston from 'winston';
 import { connect } from './helpers/db';
 import error from './helpers/error';
