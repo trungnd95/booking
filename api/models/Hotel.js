@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
 
-const hotelSchema = new mongoose.Schema({
+const roomSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -47,7 +47,7 @@ const hotelSchema = new mongoose.Schema({
   },
 });
 
-const Hotel = mongoose.model('Hotel', hotelSchema);
+const Room = mongoose.model('Room', roomSchema);
 
 export function validateInput(hotelData) {
   const schema = Joi.object({
