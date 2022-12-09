@@ -33,5 +33,5 @@ export async function updateHotel(req, res) {
 
 export async function deleteHotel(req, res) {
   await Hotel.findOneAndDelete({ _id: req.params.id });
-  res.status(200);
+  res.status(200).json({ msg: 'Hotel has been deleted' });
 }
