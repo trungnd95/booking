@@ -41,7 +41,7 @@ export function validateInput(roomData) {
     roomNumbers: Joi.array().items(
       Joi.object({
         number: Joi.number().required(),
-        unavailableDates: Joi.array().items(Joi.Date()).min(1).required(),
+        unavailableDates: Joi.array().items(),
       }),
     ),
   });

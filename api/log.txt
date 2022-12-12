@@ -10,3 +10,7 @@
 {"level":"error","message":"E11000 duplicate key error collection: booking.users index: username_1 dup key: { username: \"trungnd2\" }"}
 {"level":"error","message":"Unexpected token ` in JSON at position 94"}
 {"level":"error","message":"Unexpected token } in JSON at position 65"}
+{"level":"error","message":"Joi.Date is not a function"}
+{"level":"error","message":"Unexpected token D in JSON at position 177"}
+{"level":"error","message":"Unexpected token D in JSON at position 177"}
+{"level":"error","message":"Joi.Date is not a function"}

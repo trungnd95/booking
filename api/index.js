@@ -17,7 +17,7 @@ app.use(express.json());
 // Routes
 app.use('/auth', authRoutes);
 app.use('/hotels', hotelRoutes);
-app.use('/rooms', roomRoutes);
+app.use('/hotels/:hotelId/rooms', roomRoutes);
 app.use('/users', userRoutes);
 
 app.use(error);
