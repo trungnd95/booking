@@ -1,17 +1,18 @@
 import express from 'express';
 import { deleteUser, getUser, getUsers, updateUser } from '../controllers/user';
+import { verifyAdmin, verifyUser } from '../middlewares/verifyAuth';
 
 const router = express.Router();
 
 // update
-router.post('/', updateUser);
+router.post('/', verifyUser, updateUser);
 
 // delete
-router.delete('/', deleteUser);
+router.delete('/', verifyUser, deleteUser);
 
 // get
-router.get('/:id', getUser);
+router.get('/:id', verifyUser, getUser);
 
 // get all
-router.get('/', getUsers);
+router.get('/', verifyAdmin, getUsers);
 export default router;

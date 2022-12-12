@@ -16,8 +16,10 @@ export function verifyUser(req, res, next) {
 
 // verifyAdmin. It is use after verifyUser
 export function verifyAdmin(req, res, next) {
-  if (!req.user.isAdmin) {
-    return res.status(403).json({ msg: 'Permission denied' });
-  }
-  return next();
+  verifyUser(req, res, () => {
+    if (!req.user.isAdmin) {
+      return res.status(403).json({ msg: 'Permission denied' });
+    }
+    return next();
+  });
 }
