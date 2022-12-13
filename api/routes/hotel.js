@@ -6,16 +6,16 @@ const router = express.Router();
 // CREATE
 router.post('/', createHotel);
 
-// READ ONE
-router.get('/:id', getHotel);
-
-// READ ALL
-router.get('/', getHotels);
-
 // UPDATE
 router.put('/:id', updateHotel);
 
 // DELETE
 router.delete('/:id', deleteHotel);
+
+// READ ONE
+router.get('/:id', getHotel);
+
+// READ ALL
+router.get('/', getHotels);
 
 export default router;

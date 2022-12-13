@@ -5,14 +5,15 @@ import { verifyAdmin, verifyUser } from '../middlewares/verifyAuth';
 const router = express.Router();
 
 // update
-router.post('/', verifyUser, updateUser);
+router.put('/:id', verifyUser, updateUser);
 
 // delete
-router.delete('/', verifyUser, deleteUser);
+router.delete('/:id', verifyUser, deleteUser);
 
 // get
 router.get('/:id', verifyUser, getUser);
 
 // get all
 router.get('/', verifyAdmin, getUsers);
+
 export default router;

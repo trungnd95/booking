@@ -16,23 +16,18 @@ export const createRoom = async (req, res) => {
   const session = await mongoose.connection.startSession();
   try {
     session.startTransaction();
-    const hotel = await Hotel.findOne({ _id: req.params.hotelId });
-    if (!hotel) res.status(400).json({ msg: 'Hotel not found' });
     const room = new Room(req.body);
     const savedRoom = await room.save({ session });
-    // eslint-disable-next-line no-underscore-dangle
-    hotel.rooms.push(savedRoom._id);
-    await hotel.save({ session });
-    // await Hotel.findOneAndUpdate(
-    //   { _id: req.params.hotelId },
-    //   // eslint-disable-next-line no-underscore-dangle
-    //   { $push: { rooms: savedRoom._id } },
-    //   { session },
-    // );
+    const updatedHotel = await Hotel.findOneAndUpdate(
+      { _id: req.params.hotelId },
+      // eslint-disable-next-line no-underscore-dangle
+      { $push: { rooms: savedRoom._id } },
+      { session },
+    );
     await session.commitTransaction();
-    res.status(201).json({ room, hotel });
+    res.status(201).json({ savedRoom, updatedHotel });
   } catch (err) {
-    session.abortTransaction();
+    await session.abortTransaction();
   }
 };
 
@@ -41,25 +36,54 @@ export const createRoom = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-export const updateRoom = async (req, res) => {};
+export const updateRoom = async (req, res) => {
+  const updatedRoom = await Room.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body },
+    { new: true },
+  );
+  res.status(200).json(updatedRoom);
+};
 
 /**
  * Get room by id
  * @param {*} req
  * @param {*} res
  */
-export const getRoom = async (req, res) => {};
+export const getRoom = async (req, res) => {
+  const room = await Room.findOne({ _id: req.params.id });
+  res.status(200).json(room);
+};
 
 /**
  *Get all rooms
  * @param {*} req
  * @param {*} res
  */
-export const getRooms = async (req, res) => {};
+export const getRooms = async (req, res) => {
+  const rooms = await Room.find();
+  res.status(200).json(rooms);
+};
 
 /**
  * Delete room
  * @param {*} req
  * @param {*} res
  */
-export const deleteRoom = async (req, res) => {};
+export const deleteRoom = async (req, res) => {
+  // Create transaction to delete room and remove room from hotel
+  const session = await mongoose.connection.startSession();
+  try {
+    session.startTransaction();
+    await Room.deleteOne({ _id: req.params.id }, { session });
+    await Hotel.findOneAndUpdate(
+      { _id: req.params.hotelId },
+      { $pull: { rooms: req.params.id } },
+      { session },
+    );
+    await session.commitTransaction();
+    res.status(200).json({ msg: 'Room has been deleted' });
+  } catch (err) {
+    await session.abortTransaction();
+  }
+};

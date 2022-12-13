@@ -8,10 +8,10 @@ const router = express.Router({ mergeParams: true });
 router.post('', verifyAdmin, createRoom);
 
 // Update
-router.post('/', verifyAdmin, updateRoom);
+router.put('/:id', verifyAdmin, updateRoom);
 
 // delete
-router.delete('/', verifyAdmin, deleteRoom);
+router.delete('/:id', verifyAdmin, deleteRoom);
 
 // Get Room
 router.get('/:id', getRoom);
