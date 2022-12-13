@@ -15,3 +15,5 @@
 {"level":"error","message":"Unexpected token D in JSON at position 177"}
 {"level":"error","message":"Joi.Date is not a function"}
 {"level":"error","message":"Cast to ObjectId failed for value \"1401948100234820348\" (type string) at path \"_id\" for model \"Hotel\""}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
