@@ -1,5 +1,13 @@
 import express from 'express';
-import { createHotel, deleteHotel, getHotel, getHotels, updateHotel } from '../controllers/hotel';
+import {
+  createHotel,
+  deleteHotel,
+  getFeaturedCity,
+  getHotel,
+  getHotels,
+  // eslint-disable-next-line prettier/prettier
+  updateHotel
+} from '../controllers/hotel';
 
 const router = express.Router();
 
@@ -11,6 +19,9 @@ router.put('/:id', updateHotel);
 
 // DELETE
 router.delete('/:id', deleteHotel);
+
+// READ FEATURED HOTELS
+router.get('/featuredCity', getFeaturedCity);
 
 // READ ONE
 router.get('/:id', getHotel);
