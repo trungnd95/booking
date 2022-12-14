@@ -7,7 +7,7 @@ function PListItem({ imgSrc, accommodationType, numberOfHotels }) {
       <img src={imgSrc} alt="" className="pListItemImg" />
       <div className="pListItemTitles">
         <h1>{accommodationType}</h1>
-        <h2>{numberOfHotels} hotels</h2>
+        <h2>{numberOfHotels} properties</h2>
       </div>
     </div>
   );

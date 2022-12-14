@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-function FeaturedItem({ imgSrc, name, shortDesc }) {
+function FeaturedItem({ imgSrc, name, count }) {
   return (
     <div className="featuredItem">
       <img src={imgSrc} alt="" className="featuredImg" />
       <div className="featuredTitles">
         <h1>{name}</h1>
-        <h2>{shortDesc}</h2>
+        <h2>{`${count} properties`}</h2>
       </div>
     </div>
   );
@@ -16,12 +16,12 @@ function FeaturedItem({ imgSrc, name, shortDesc }) {
 FeaturedItem.propTypes = {
   imgSrc: PropTypes.string,
   name: PropTypes.string,
-  shortDesc: PropTypes.string,
+  count: PropTypes.number,
 };
 
 FeaturedItem.defaultProps = {
   imgSrc: '',
   name: '',
-  shortDesc: '',
+  count: 0,
 };
 export default FeaturedItem;
