@@ -43,32 +43,11 @@ export async function deleteHotel(req, res) {
 }
 
 /**
- * Get hotel
- * @param {*} req
- * @param {*} res
- */
-export async function getHotel(req, res) {
-  const user = await Hotel.findOne({ _id: req.params.id });
-  res.status(200).json(user);
-}
-
-/**
- * Get all hotels
- * @param {*} req
- * @param {*} res
- */
-export async function getHotels(req, res) {
-  const users = await Hotel.find({});
-  res.status(200).json(users);
-}
-
-/**
  * Get featured hotels
  * @param {*} req
  * @param {*} res
  */
 export async function getFeaturedCity(req, res) {
-  console.log('xxxx');
   const result = await Hotel.aggregate([
     {
       $group: {
@@ -85,5 +64,49 @@ export async function getFeaturedCity(req, res) {
       $limit: 3,
     },
   ]).exec();
-  console.log('result', result);
+  res.status(200).json(result);
+}
+
+/**
+ * Count number of each properties
+ * @param {*} req
+ * @param {*} res
+ */
+export async function countProperties(req, res) {
+  const result = await Hotel.aggregate([
+    {
+      $group: {
+        _id: '$type',
+        count: { $sum: 1 },
+      },
+    },
+  ]).exec();
+  res.status(200).json(result);
+}
+
+/**
+ * Get hotel
+ * @param {*} req
+ * @param {*} res
+ */
+export async function getHotel(req, res) {
+  const user = await Hotel.findOne({ _id: req.params.id });
+  res.status(200).json(user);
+}
+
+/**
+ * Get all hotels
+ * @param {*} req
+ * @param {*} res
+ */
+export async function getHotels(req, res) {
+  const { min, max, limit, ...others } = req.query;
+  const users = await Hotel.find({
+    ...others,
+    cheapestPrice: {
+      $gte: min,
+      $lte: max,
+    },
+  }).limit(limit);
+  res.status(200).json(users);
 }

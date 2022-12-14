@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  countProperties,
   createHotel,
   deleteHotel,
   getFeaturedCity,
@@ -22,6 +23,9 @@ router.delete('/:id', deleteHotel);
 
 // READ FEATURED HOTELS
 router.get('/featuredCity', getFeaturedCity);
+
+// READ PROPERTIES LIST
+router.get('/propertiesCnt', countProperties);
 
 // READ ONE
 router.get('/:id', getHotel);

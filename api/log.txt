@@ -24,3 +24,4 @@
 {"level":"error","message":"Unexpected string in JSON at position 66"}
 {"level":"error","message":"Unexpected string in JSON at position 66"}
 {"level":"error","message":"Unexpected string in JSON at position 114"}
+{"level":"error","message":"Unexpected end of JSON input"}
