@@ -6,7 +6,7 @@ import './Featured.css';
 import FeaturedItem from './FeaturedItem';
 
 function Featured() {
-  const { data, loading, error } = useFetch('/hotels/featuredCity');
+  const { data, loading } = useFetch('/hotels/featuredCity');
   return (
     <div className="featured">
       {loading ? (

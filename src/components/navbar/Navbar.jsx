@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
   return (
     <div className="navbar">
       <div className="navbarContainer">
-        <span className="logo">BookingApp</span>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <span className="logo">BookingApp</span>
+        </Link>
         <div className="navItems">
           <button type="button" className="navButton">
             Login

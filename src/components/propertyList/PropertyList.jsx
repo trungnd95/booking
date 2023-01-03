@@ -6,7 +6,7 @@ import PListItem from './PListItem';
 import './PropertyList.css';
 
 function PropertyList() {
-  const { data, loading, error } = useFetch('/hotels/propertiesCnt');
+  const { data, loading } = useFetch('/hotels/propertiesCnt');
   return (
     <div className="pList">
       {loading ? (

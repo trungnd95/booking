@@ -101,12 +101,12 @@ export async function getHotel(req, res) {
  */
 export async function getHotels(req, res) {
   const { min, max, limit, ...others } = req.query;
-  const users = await Hotel.find({
+  const hotels = await Hotel.find({
     ...others,
     cheapestPrice: {
-      $gte: min,
-      $lte: max,
+      $gte: min || 10,
+      $lte: max || 200,
     },
   }).limit(limit);
-  res.status(200).json(users);
+  res.status(200).json(hotels);
 }
