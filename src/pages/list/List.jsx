@@ -1,14 +1,37 @@
+/* eslint-disable no-underscore-dangle */
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import { useLocation } from 'react-router-dom';
 import { Header, Navbar, SearchItem } from '../../components';
+import Loading from '../../components/loading/Loading';
+import useFetch from '../../hooks/useFetch';
 import './List.css';
 
 function List() {
   const location = useLocation();
-  const [searchState, setSearchState] = useState(location.state);
+  const [searchState, setSearchState] = useState({
+    destination: location.state.destination,
+    dateRange: location.state.dateRange,
+    options: location.state.options,
+    minPrice: 10,
+    maxPrice: 500,
+  });
   const [openDate, setOpenDate] = useState(false);
+
+  const { data, loading } = useFetch(
+    `/hotels?${searchState.destination ? `city=${searchState.destination}` : ''}&min=${
+      searchState.minPrice
+    }&max=${searchState.maxPrice}`,
+  );
+
+  const handleInputChange = (e) => {
+    setSearchState((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <div>
       <Navbar />
@@ -22,9 +45,10 @@ function List() {
               <input
                 id="desc"
                 type="text"
-                name="desc"
+                name="destination"
                 value={searchState.destination}
                 placeholder="Where do you want to go?"
+                onChange={handleInputChange}
               />
             </div>
             <div className="lsItem">
@@ -43,7 +67,10 @@ function List() {
                 <DateRange
                   editableDateInputs
                   onChange={(item) =>
-                    setSearchState((prev) => ({ ...prev, destination: [item.selection] }))
+                    setSearchState((prev) => ({
+                      ...prev,
+                      dateRange: [item.selection],
+                    }))
                   }
                   moveRangeOnFirstSelection={false}
                   minDate={new Date()}
@@ -64,6 +91,8 @@ function List() {
                     id="minPrice"
                     name="minPrice"
                     className="lsOptionItemInput"
+                    value={searchState.minPrice}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -75,6 +104,8 @@ function List() {
                     id="maxPrice"
                     name="maxPrice"
                     className="lsOptionItemInput"
+                    value={searchState.maxPrice}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -118,12 +149,7 @@ function List() {
             <button type="button">Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {loading ? <Loading /> : data.map((item) => <SearchItem key={item._id} item={item} />)}
           </div>
         </div>
       </div>

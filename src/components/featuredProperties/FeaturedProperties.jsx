@@ -14,7 +14,7 @@ function FeaturedProperties() {
         data.map((fp) => (
           <FeaturedPropertyItem
             key={fp.city}
-            imgSrc="https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o="
+            imgSrc={fp.photos[0]}
             name={fp.name}
             city={fp.city}
             price={fp.cheapestPrice}

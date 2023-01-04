@@ -107,6 +107,8 @@ export async function getHotels(req, res) {
       $gte: min || 10,
       $lte: max || 200,
     },
-  }).limit(limit);
+  }).limit(limit || 10);
+  console.log(req.query);
+  console.log(hotels);
   res.status(200).json(hotels);
 }

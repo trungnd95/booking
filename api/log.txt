@@ -25,3 +25,8 @@
 {"level":"error","message":"Unexpected string in JSON at position 66"}
 {"level":"error","message":"Unexpected string in JSON at position 114"}
 {"level":"error","message":"Unexpected end of JSON input"}
+{"level":"error","message":"Cast to Number failed for value \"[ '0', '1000}' ]\" (type Array) at path \"cheapestPrice\" for model \"Hotel\""}
+{"level":"error","message":"Cast to Number failed for value \"[ '0', '1000}' ]\" (type Array) at path \"cheapestPrice\" for model \"Hotel\""}
+{"level":"error","message":"Cast to Number failed for value \"[ '0', '1000' ]\" (type Array) at path \"cheapestPrice\" for model \"Hotel\""}
+{"level":"error","message":"Cast to Number failed for value \"[ '0', '1000' ]\" (type Array) at path \"cheapestPrice\" for model \"Hotel\""}
+{"level":"error","message":"Cast to Number failed for value \"[ '0', '1000' ]\" (type Array) at path \"cheapestPrice\" for model \"Hotel\""}
