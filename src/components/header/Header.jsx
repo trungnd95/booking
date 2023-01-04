@@ -8,6 +8,7 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useNavigate } from 'react-router-dom';
+import { useSearchContext } from '../../context/SearchContext';
 import './Header.css';
 
 function Header({ page = 'home' }) {
@@ -38,7 +39,9 @@ function Header({ page = 'home' }) {
   };
 
   const navigate = useNavigate();
+  const { dispatch } = useSearchContext();
   const handleSearch = () => {
+    dispatch({ type: 'NEW_SEARCH', payload: { city: destination, dates: dateRange, options } });
     navigate('/hotels', { state: { destination, dateRange, options } });
   };
 

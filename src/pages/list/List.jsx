@@ -5,6 +5,7 @@ import { DateRange } from 'react-date-range';
 import { useLocation } from 'react-router-dom';
 import { Header, Navbar, SearchItem } from '../../components';
 import Loading from '../../components/loading/Loading';
+import { useSearchContext } from '../../context/SearchContext';
 import useFetch from '../../hooks/useFetch';
 import './List.css';
 
@@ -25,11 +26,20 @@ function List() {
     }&max=${searchState.maxPrice}`,
   );
 
+  const { dispatch } = useSearchContext();
   const handleInputChange = (e) => {
     setSearchState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    dispatch({
+      type: 'NEW_SEARCH',
+      payload: {
+        city: searchState.destination,
+        dateRange: searchState.dateRange,
+        option: searchState.options,
+      },
+    });
   };
 
   return (

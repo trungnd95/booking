@@ -21,7 +21,7 @@ FeaturedPropertyItem.propTypes = {
   name: PropTypes.string,
   city: PropTypes.string,
   price: PropTypes.number,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
   ratingLevel: PropTypes.string,
 };
 

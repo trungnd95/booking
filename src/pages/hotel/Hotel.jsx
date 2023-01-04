@@ -5,12 +5,20 @@ import {
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Contact, Footer, Header, Navbar } from '../../components';
 import Loading from '../../components/loading/Loading';
+import { useSearchContext } from '../../context/SearchContext';
 import useFetch from '../../hooks/useFetch';
 import './Hotel.css';
+
+function dayDifference(date1, date2) {
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+  const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+  return diffDays;
+}
 
 function Hotel() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -30,7 +38,17 @@ function Hotel() {
   const location = useLocation();
   const hotelId = location.pathname.split('/')[2];
   const { data, loading } = useFetch(`/hotels/${hotelId}`);
-  const handleReserveClick = (e) => {};
+
+  const { dates, options } = useSearchContext().searchState;
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+
+  const handleReserveClick = (e) => {
+    // TODO
+  };
+
+  useEffect(() => {
+    console.log('Hotel component rerender');
+  }, []);
   return (
     <div>
       <Navbar />
@@ -96,12 +114,14 @@ function Hotel() {
                 <p className="hotelDesc">{data.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for a 9-night stay!</h1>
+                <h1>Perfect for a {days}-night stay!</h1>
                 <span>
                   Located in the real heart of Krakow, this property has an excellent location score
                   of 9.8!
                 </span>
-                <h2>{/* <b>${days * data.cheapestPrice * options.room}</b> ({days} nights) */}</h2>
+                <h2>
+                  <b>${days * data.cheapestPrice * options.room}</b> ({days} nights)
+                </h2>
                 <button type="button" onClick={handleReserveClick}>
                   Reserve or Book Now!
                 </button>

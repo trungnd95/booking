@@ -13,7 +13,7 @@ function FeaturedProperties() {
       ) : (
         data.map((fp) => (
           <FeaturedPropertyItem
-            key={fp.city}
+            key={fp.name}
             imgSrc={fp.photos[0]}
             name={fp.name}
             city={fp.city}
