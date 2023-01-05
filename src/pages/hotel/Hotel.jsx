@@ -40,6 +40,7 @@ function Hotel() {
   const { data, loading } = useFetch(`/hotels/${hotelId}`);
 
   const { dates, options } = useSearchContext().searchState;
+  console.log(useSearchContext());
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
   const handleReserveClick = (e) => {

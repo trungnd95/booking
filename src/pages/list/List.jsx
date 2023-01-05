@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { format } from 'date-fns';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import { useLocation } from 'react-router-dom';
 import { Header, Navbar, SearchItem } from '../../components';
@@ -26,21 +26,34 @@ function List() {
     }&max=${searchState.maxPrice}`,
   );
 
-  const { dispatch } = useSearchContext();
   const handleInputChange = (e) => {
-    setSearchState((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setSearchState((prev) =>
+      e.target.name.includes('options')
+        ? {
+            ...prev,
+            options: {
+              ...prev.options,
+              [e.target.name.split('.')[1]]: Number(e.target.value),
+            },
+          }
+        : {
+            ...prev,
+            [e.target.name]: e.target.value,
+          },
+    );
+  };
+
+  const { dispatch } = useSearchContext();
+  useEffect(() => {
     dispatch({
       type: 'NEW_SEARCH',
       payload: {
         city: searchState.destination,
-        dateRange: searchState.dateRange,
-        option: searchState.options,
+        dates: searchState.dateRange,
+        options: searchState.options,
       },
     });
-  };
+  }, [dispatch, searchState]);
 
   return (
     <div>
@@ -123,11 +136,12 @@ function List() {
                   <input
                     type="number"
                     id="adultOption"
-                    name="adultOption"
+                    name="options.adult"
                     className="lsOptionItemInput"
                     min={1}
                     placeholder={1}
                     value={searchState.options.adult}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -135,11 +149,12 @@ function List() {
                   <input
                     type="number"
                     id="childrenOption"
-                    name="childrenOption"
+                    name="options.children"
                     className="lsOptionItemInput"
                     min={0}
                     placeholder={0}
                     value={searchState.options.children}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -147,11 +162,12 @@ function List() {
                   <input
                     type="number"
                     id="roomOption"
-                    name="roomOption"
+                    name="options.room"
                     className="lsOptionItemInput"
                     min={1}
                     placeholder={1}
                     value={searchState.options.room}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
