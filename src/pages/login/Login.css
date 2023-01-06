@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3)),
-    url('https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500');
+    url('https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-size: cover;
   background-position: center;
 }
@@ -12,9 +12,9 @@
 .lContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   gap: 10px;
-  height: 60%;
+  height: 50%;
   width: 30%;
   background-color: #fff;
   border-radius: 10px;
@@ -22,10 +22,26 @@
   padding: 20px;
 }
 
+.lTitle {
+  text-align: center;
+}
+
+.lFormElement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .lInput {
   height: 30px;
-  padding: 10px;
-  margin: 15px;
+  padding: 6px;
+  width: 95%;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+
+.lInput:focus {
+  outline: none;
 }
 
 .lButton {
@@ -38,7 +54,11 @@
   border-radius: 5px;
 }
 
-.lButton:disabled {
-  background-color: #0071c28c;
-  cursor: not-allowed;
+.lButton:hover {
+  opacity: 0.8;
+}
+
+.lError {
+  font-size: 12px;
+  color: red;
 }

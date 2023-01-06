@@ -51,7 +51,7 @@ export async function loginUser(req, res) {
     password: new PasswordComplexity(),
   });
   const { error } = validateSchema.validate(req.body);
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error) return res.status(400).json({ msg: error.details[0].message });
 
   // 1. Find user that match with email
   const user = await User.findOne({ email: req.body.email });

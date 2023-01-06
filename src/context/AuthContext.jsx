@@ -54,7 +54,7 @@ export default function AuthContextProvider({ children }) {
   const [authState, dispatch] = useReducer(AuthReducer, AUTH_INITIAL);
 
   useEffect(() => {
-    localStorage.setItem('user', authState.user);
+    localStorage.setItem('user', JSON.stringify(authState.user));
   }, [authState.user]);
 
   const contextValue = useMemo(
