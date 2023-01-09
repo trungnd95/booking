@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AUTH_INITIAL = {
   user: JSON.parse(localStorage.getItem('user')) || null,
@@ -53,9 +54,14 @@ const AuthReducer = (state, { type, payload }) => {
 export default function AuthContextProvider({ children }) {
   const [authState, dispatch] = useReducer(AuthReducer, AUTH_INITIAL);
 
+  const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(authState.user));
-  }, [authState.user]);
+    if (location.pathname === '/login' && authState.user) {
+      navigate('/');
+    }
+  }, [authState.user, location.pathname, navigate]);
 
   const contextValue = useMemo(
     () => ({
@@ -64,6 +70,7 @@ export default function AuthContextProvider({ children }) {
     }),
     [authState, dispatch],
   );
+
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 }
 
