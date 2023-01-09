@@ -46,6 +46,21 @@ export const updateRoom = async (req, res) => {
 };
 
 /**
+ * Update room availability
+ */
+export const updateRoomAvailability = async (req, res) => {
+  await Room.updateOne(
+    { 'roomNumbers._id': req.params.id },
+    {
+      $push: {
+        'roomNumbers.$.unavailableDates': req.body.dates,
+      },
+    },
+  );
+  res.status(200).json('Room has been updated.');
+};
+
+/**
  * Get room by id
  * @param {*} req
  * @param {*} res
@@ -60,9 +75,20 @@ export const getRoom = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-export const getRooms = async (req, res) => {
+export const getAllRooms = async (req, res) => {
   const rooms = await Room.find();
   res.status(200).json(rooms);
+};
+
+/**
+ * Get all rooms in one hotel
+ * @param {*} req
+ * @param {*} res
+ */
+export const getRoomsInHotel = async (req, res) => {
+  const hotel = await Hotel.findById(req.params.hotelId);
+  const list = await Promise.all(hotel.rooms.map((room) => Room.findById(room)));
+  res.status(200).json(list);
 };
 
 /**

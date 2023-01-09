@@ -5,10 +5,12 @@ import {
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Contact, Footer, Header, Navbar } from '../../components';
 import Loading from '../../components/loading/Loading';
+import Reserve from '../../components/reserve/Reserve';
+import { useAuthContext } from '../../context/AuthContext';
 import { useSearchContext } from '../../context/SearchContext';
 import useFetch from '../../hooks/useFetch';
 import './Hotel.css';
@@ -23,6 +25,8 @@ function dayDifference(date1, date2) {
 function Hotel() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [slideOpen, setSlideOpen] = useState(false);
+  const [openReserveModal, setOpenReserveModal] = useState(false);
+
   const handleSwipe = (direction, maxLength) => {
     let newSlideNumber;
 
@@ -40,16 +44,20 @@ function Hotel() {
   const { data, loading } = useFetch(`/hotels/${hotelId}`);
 
   const { dates, options } = useSearchContext().searchState;
-  console.log(useSearchContext());
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
+  const {
+    authState: { user },
+  } = useAuthContext();
+  const navigate = useNavigate();
   const handleReserveClick = (e) => {
-    // TODO
+    e.preventDefault();
+    if (user) {
+      setOpenReserveModal(true);
+    } else {
+      navigate('/login');
+    }
   };
-
-  useEffect(() => {
-    console.log('Hotel component rerender');
-  }, []);
   return (
     <div>
       <Navbar />
@@ -81,7 +89,7 @@ function Hotel() {
             </div>
           )}
           <div className="hotelWrapper">
-            <button type="button" className="bookNow">
+            <button type="button" className="bookNow" onClick={handleReserveClick}>
               Reserve or Book Now!
             </button>
             <h1 className="hotelTitle">{data.name}</h1>
@@ -133,6 +141,7 @@ function Hotel() {
           <Footer />
         </div>
       )}
+      {openReserveModal && <Reserve setOpen={setOpenReserveModal} hotelId={hotelId} />}
     </div>
   );
 }
